@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="charset=UTF-8">
+<title>Login</title>
+</head>
+<body>
+	<h1>登陆页面</h1>
+	<!-- <form action="/doLogin" method="post"> -->
+	    <div class="input">
+	        <label for="name">用户名</label>
+	        <input type="text" name="username" id="name">
+	        <span class="spin"></span>
+	    </div>
+	    <div class="input">
+	        <label for="pass">密码</label>
+	        <input type="password" name="password" id="pass">
+	        <span class="spin"></span>
+	    </div>
+	    <div class="button login">
+	        <span>登录</span>
+	    </div>
+	<!-- </form> -->
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(".login").on("click",function(){
+		console.log("username",$("#name").val());
+		console.log("password",$("#pass").val());
+		var params ={
+			"username":$("#name").val(),
+			"password":$("#pass").val()
+		}
+		$.ajax({
+			url: "/login",
+			type: "post",
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify(params),
+			success: function (data) {
+				console.log("data",data);
+				console.log("data.code",data.code);
+				if (data.code == 100) {
+					/* toastr.success(data.extend.resMsg + ', The jump will take place later。'); */
+					setTimeout(function() {
+						window.location.href = "Index";
+					}, 100);
+				} else {
+					
+					/* toastr.error(data.extend.resMsg); */
+				}
+			},
+			error: function() {
+				console.log("error");
+				/* toastr.error('Login failed, please login again！'); */
+			},
+			complete: function() {
+				/* hideSpinner(self); */
+			}
+		});
+	});
+
+</script>
+</body>
+</html>

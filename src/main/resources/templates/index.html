@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+</head>
+<body>
+	<p th:text="'hello SpringBoot'">hello thymeleaf</p>
+	<h3 sec:authorize="isAuthenticated()">已被认证</h3>
+	<h3 sec:authorize="hasRole('AdminManager')">有AdminManager角色</h3>
+	<h3 sec:authorize="hasRole('CommonUser')">有CommonUser角色</h3>
+	<h3 sec:authentication="principal.authorities">所有权限</h3>
+</body>
+</html>

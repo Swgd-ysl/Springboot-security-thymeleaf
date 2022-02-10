@@ -1,0 +1,48 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/huashuohair?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    # 使用druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 5
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  thymeleaf:
+    #开启thymeleaf视图解析
+    enabled: true  
+    #编码
+    encoding: utf-8  
+    #前缀
+    prefix: classpath:/templates/ 
+    #是否使用缓存
+    cache: false  
+    #严格的HTML语法模式
+    mode: HTML  
+    #后缀名
+    suffix: .html  
+    
+# 配置mybatis规则
+mybatis:
+  #sql映射文件位置
+  mapper-locations: classpath:mapper/*.xml  
+  #configuration:
+    #map-underscore-to-camel-case: true
+#springdoc
+springdoc:
+  swagger-ui:
+    enabled: true 
+  packagesToScan: com.huashuohair.app.controller    
