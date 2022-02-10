@@ -1,0 +1,8 @@
+target/*
+src/test/*
+.mvnw/**
+.mvn/**
+.settings
+.project
+.classpath
+/target/
