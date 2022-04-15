@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -8,19 +8,20 @@ spring:
     password: root
     # 使用druid连接池
     type: com.alibaba.druid.pool.DruidDataSource
-    filters: stat
-    maxActive: 20
-    initialSize: 5
-    maxWait: 60000
-    minIdle: 5
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: select 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    maxOpenPreparedStatements: 20
+    druid:
+      filters: stat,wall  #配置扩展插件，常用的插件有=>stat:监控统计  wall:防御sql注入
+      initialSize: 5 #初始化连接大小
+      minIdle: 5 #最小连接池数量
+      maxActive: 20 #最大连接池数量
+      maxWait: 60000  #获取连接时最大等待时间，单位毫秒
+      timeBetweenEvictionRunsMillis: 60000 #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      minEvictableIdleTimeMillis: 300000 #配置一个连接在池中最小生存的时间，单位是毫秒
+      validationQuery: SELECT 1 FROM DUAL    #测试连接
+      testWhileIdle: true  #申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
+      testOnBorrow: false #获取连接时执行检测，建议关闭，影响性能
+      testOnReturn: false #归还连接时执行检测，建议关闭，影响性能
+      poolPreparedStatements: false  #是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
+      maxOpenPreparedStatements: 20
   thymeleaf:
     #开启thymeleaf视图解析
     enabled: true  

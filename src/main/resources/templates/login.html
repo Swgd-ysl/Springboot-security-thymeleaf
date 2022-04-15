@@ -1,34 +1,77 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta http-equiv="Content-Type" content="charset=UTF-8">
-<title>Login</title>
+	<meta http-equiv="Content-Type" content="charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HSCRM-Login</title>
+	<link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/base.css}" rel="stylesheet">
+	<style>
+		.c-app { background-color: #f5feff; }
+		.header{ height:15%;}
+		.fotter{ height:25%;}
+		@media (min-width:576px){
+			.xtitle{font-size:1.6rem;}
+		}
+	</style>
 </head>
-<body>
-	<h1>登陆页面</h1>
-	<!-- <form action="/doLogin" method="post"> -->
-	    <div class="input">
-	        <label for="name">用户名</label>
-	        <input type="text" name="username" id="name">
-	        <span class="spin"></span>
-	    </div>
-	    <div class="input">
-	        <label for="pass">密码</label>
-	        <input type="password" name="password" id="pass">
-	        <span class="spin"></span>
-	    </div>
-	    <div class="button login">
-	        <span>登录</span>
-	    </div>
-	<!-- </form> -->
-<script type="text/javascript" src="/js/jquery.min.js"></script>
+<body class="c-app">
+	<div class="header d-flex jsutify-content-start">
+		<div class="align-self-center">
+			<div class="d-inline-block"><img class="" alt="logo" src="/images/huashuologo.png" width="100px;"></div>
+			<div class="xtitle d-inline-block text-dark">许昌华硕发制品有限公司CRM系统</div>
+		</div>
+	</div>
+	<div class="container d-flex align-items-center">
+		<div class="row">
+			<div class="col-sm-8">
+				<img class="img-fluid float-end" src="/images/login.jpg" alt="互联">
+			</div>
+			<div class="col-sm-4 card align-self-center py-3 rounded">
+				<form action="" class="was-validated">
+					<h5 class="text-center car-header">欢迎登录</h5>
+					<div class="card-body">
+						<div class="form-floating mb-2">
+					        <input class="form-control" type="text" name="username" id="name" required placeholder="请输入用户名" >
+					        <label for="name" class="text-muted">用户名</label>
+					        <div class="invalid-feedback">请输入用户名！</div>
+					    </div>
+					    <div class="form-floating mb-2">
+					        <input class="form-control" type="password" name="password" id="pwd" required placeholder="请输入密码" >
+					        <label for="pwd" class="text-muted">密码</label>
+					        <div class="invalid-feedback">请输入密码！</div>
+					    </div>
+					</div>
+					<div class="card-fotter d-flex justify-content-between px-3">
+						<div class="btn btn-primary btn-lg w-50 login ">登录</div>
+						<div class="changPwd text-muted align-self-center">修改密码</div>
+					</div>
+			    </form>
+			</div>
+		</div>
+	</div>
+	<div class="fotter d-flex flex-wrap justify-content-center align-content-end">
+		<p class="text-muted text-center">© 2022,All Rights Reserved</p>
+	</div>
+<script type="text/javascript" th:src="@{/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 <script type="text/javascript">
 	$(".login").on("click",function(){
-		console.log("username",$("#name").val());
-		console.log("password",$("#pass").val());
+		var username = $("#name").val();
+		var password = $("#pwd").val();
+		if(username =="" || username == null || username == "undefined"){
+			console.log("请输入用户名");
+			return;
+		}
+		if(password =="" || password == null || password == "undefined"){
+			console.log("请输入密码");
+			return;
+		}
 		var params ={
-			"username":$("#name").val(),
-			"password":$("#pass").val()
+			"username":username,
+			"password":password
 		}
 		$.ajax({
 			url: "/login",

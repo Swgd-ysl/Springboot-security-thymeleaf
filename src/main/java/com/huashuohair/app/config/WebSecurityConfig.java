@@ -78,6 +78,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .loginPage("/Login")
             .loginProcessingUrl("/doLogin")
             .defaultSuccessUrl("/Index")
+            //.usernameParameter("name") //修改前端参数名
+            //.passwordParameter("passwd") //修改前端参数名
             .permitAll()  //开启SpringSecurity内置的表单登录，会提供一个/login接口
             .and()
             .logout()

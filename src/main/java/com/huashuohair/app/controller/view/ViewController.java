@@ -3,6 +3,8 @@ package com.huashuohair.app.controller.view;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.huashuohair.app.utils.SecurityUtil;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -20,6 +22,9 @@ public class ViewController{
 	@Operation(summary ="index页")
 	@GetMapping("/Index")
 	public String toIndexPage(){
+		if(SecurityUtil.getAuthorities().contains("ROLE_AdminManager")){
+			return "home/admin";
+		}
 		return "index";
 	}
 	

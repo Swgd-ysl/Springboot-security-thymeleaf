@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta http-equiv="Content-Type" content="charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HSCRM-admin</title>
+</head>
+<body>
+	<span th:text="${#locale.country}">cn-</span>
+	<p th:text="'hello adminManager'">hello adminManager</p>
+	<h3 sec:authorize="isAuthenticated()">已被认证</h3>
+	<h3 sec:authorize="hasRole('AdminManager')">有AdminManager角色</h3>
+</body>
+</html>

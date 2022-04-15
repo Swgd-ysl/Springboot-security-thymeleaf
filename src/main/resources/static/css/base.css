@@ -1,0 +1,7 @@
+html,body{
+	height:100%;
+	font-size:1rem;
+}
+.vertical-center{
+	transform: translateY(50%);
+}
