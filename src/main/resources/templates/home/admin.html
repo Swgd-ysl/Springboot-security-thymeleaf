@@ -8,6 +8,7 @@
 	<title>HSCRM-admin</title>
 </head>
 <body>
+
 	<span th:text="${#locale.country}">cn-</span>
 	<p th:text="'hello adminManager'">hello adminManager</p>
 	<h3 sec:authorize="isAuthenticated()">已被认证</h3>
